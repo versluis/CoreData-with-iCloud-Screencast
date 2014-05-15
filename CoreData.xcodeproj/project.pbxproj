@@ -61,6 +61,7 @@
 		D2559FE419252C4900AEC449 /* CoreDataTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreDataTests-Info.plist"; sourceTree = "<group>"; };
 		D2559FE619252C4900AEC449 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D2559FE819252C4900AEC449 /* CoreDataTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataTests.m; sourceTree = "<group>"; };
+		D2559FF219252C8200AEC449 /* CoreData.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CoreData.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +124,7 @@
 		D2559FBC19252C4900AEC449 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				D2559FF219252C8200AEC449 /* CoreData.entitlements */,
 				D2559FC519252C4900AEC449 /* AppDelegate.h */,
 				D2559FC619252C4900AEC449 /* AppDelegate.m */,
 				D2559FC819252C4900AEC449 /* Main.storyboard */,
@@ -213,6 +215,14 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Pinkstone Pictures LLC";
 				TargetAttributes = {
+					D2559FB019252C4900AEC449 = {
+						DevelopmentTeam = F34HMY85N9;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
 					D2559FD919252C4900AEC449 = {
 						TestTargetID = D2559FB019252C4900AEC449;
 					};
@@ -392,6 +402,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = CoreData/CoreData.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreData/CoreData-Prefix.pch";
 				INFOPLIST_FILE = "CoreData/CoreData-Info.plist";
@@ -405,6 +417,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = CoreData/CoreData.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreData/CoreData-Prefix.pch";
 				INFOPLIST_FILE = "CoreData/CoreData-Info.plist";

@@ -29,7 +29,51 @@
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
+    
+    // add iCloud observers
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(storesWillChange) name:NSPersistentStoreCoordinatorStoresWillChangeNotification object:self.managedObjectContext.persistentStoreCoordinator];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(storesDidChange:) name:NSPersistentStoreCoordinatorStoresDidChangeNotification object:self.managedObjectContext.persistentStoreCoordinator];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mergeContent:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:self.managedObjectContext.persistentStoreCoordinator];
+    
 }
+
+#pragma mark - iCloud Methds
+
+- (void)storesWillChange {
+    
+    NSLog(@"\n\nStores WILL change notification received\n\n");
+    
+    // disbale UI
+    [[UIApplication sharedApplication]beginIgnoringInteractionEvents];
+    
+    // save and reset our context
+    if (self.managedObjectContext.hasChanges) {
+        [self.managedObjectContext save:nil];
+    } else {
+        [self.managedObjectContext reset];
+    }
+}
+
+- (void)storesDidChange:(NSNotification *)notification {
+    
+    NSLog(@"\n\nStores DID change notification received\n\n");
+    
+    // enable UI
+    [[UIApplication sharedApplication]endIgnoringInteractionEvents];
+    
+    // update UI
+    [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
+    [self.tableView reloadData];
+}
+
+- (void)mergeContent:(NSNotification *)notification {
+    
+    NSLog(@"Merge Content here");
+    [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
