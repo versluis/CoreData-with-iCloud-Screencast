@@ -60,6 +60,34 @@
     
     NSLog(@"\n\nStores DID change notification received\n\n");
     
+    // why did my stores change?
+    NSNumber *transitionType = [notification.userInfo objectForKey:NSPersistentStoreUbiquitousTransitionTypeKey];
+    int theReason = [transitionType intValue];
+    
+    switch (theReason) {
+        case NSPersistentStoreUbiquitousTransitionTypeAccountAdded: {
+            
+            // an iCloud account was added
+        }
+            break;
+        case NSPersistentStoreUbiquitousTransitionTypeAccountRemoved: {
+            
+            // an iCloud account was removed
+        }
+        case NSPersistentStoreUbiquitousTransitionTypeContentRemoved: {
+            
+            // content was removed
+        }
+        case NSPersistentStoreUbiquitousTransitionTypeInitialImportCompleted: {
+            
+            // initial import completed
+        }
+            
+        default:
+            break;
+    }
+    
+    
     // enable UI
     [[UIApplication sharedApplication]endIgnoringInteractionEvents];
     
