@@ -7,7 +7,6 @@
 //
 
 #import "MasterViewController.h"
-
 #import "DetailViewController.h"
 
 @interface MasterViewController ()
@@ -57,6 +56,11 @@
 - (void)storesDidChange:(NSNotification *)notification {
     
     NSLog(@"\n\nStores DID change notification received\n\n");
+    
+    // re-fetch results for initial import on 2nd device
+    NSLog(@"Re-Fetching the results...");
+    _fetchedResultsController = nil;
+    [self fetchedResultsController];
     
     // why did my stores change?
     NSNumber *transitionType = [notification.userInfo objectForKey:NSPersistentStoreUbiquitousTransitionTypeKey];
